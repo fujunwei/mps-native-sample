@@ -27,6 +27,8 @@ class ExecutionImplMacMPS {
   void StartCompute();
 
   bool IsValid() const;
+  
+  std::vector<float> OutputData();
 
  private:
   void API_AVAILABLE(macos(10_13))
@@ -52,6 +54,8 @@ class ExecutionImplMacMPS {
   API_AVAILABLE(macos(10_13))
   std::vector<MPSImage*> constant_mpsimages_;
   API_AVAILABLE(macos(10_13)) std::vector<id<MTLBuffer>> constant_mtlbuffers_;
+  
+  std::vector<float> output_data_;
 };
 
 }  // namespace ml

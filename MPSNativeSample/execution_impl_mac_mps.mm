@@ -261,18 +261,24 @@ void ExecutionImplMacMPS::StartCompute() {
         for (size_t i = 0; i < compilation_->outputs_.size(); ++i) {
 //          std::unique_ptr<OperandInfo>& output_data = outputs_info_[i];
           int output_index = compilation_->outputs_[i];
-          ValueInfo& output_data = compilation_->values_[output_index];
-          float* data = (float*) malloc(output_data.data.size() * sizeof(float));
+//          ValueInfo& output_data = compilation_->values_[output_index];
           id<MTLBuffer> output_buffer = output_mtlbuffers_[i];
-          memcpy(data, [output_buffer contents],
-                 output_data.data.size() * sizeof(float));
-          for (size_t j = 0; j < output_data.data.size(); ++j) {
-            std::cout << " ==== " << data[j] << "\n";
-          }
+          const OperandMac& output_operand = compilation_->operands_[output_index];
+          std::vector<float> output_data(output_operand.requiredSize() / sizeof(float));
+          memcpy(output_data.data(), [output_buffer contents],
+                 output_data.size() * sizeof(float));
+//          for (size_t j = 0; j < output_data.size(); ++j) {
+//            std::cout << " ==== " << output_data[j] << "\n";
+//          }
+          output_data_ = output_data;
         }
       }  // @autoreleasepool
     } while (0);
   }
+}
+  
+std::vector<float> ExecutionImplMacMPS::OutputData() {
+  return output_data_;
 }
 
 void ExecutionImplMacMPS::UploadToMPSImage(

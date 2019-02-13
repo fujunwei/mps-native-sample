@@ -94,13 +94,10 @@ int32_t ModelImplMac::IdentifyInputsAndOutputs(const std::vector<uint32_t>& inpu
 //
 //  std::move(callback).Run(NOT_ERROR);
 //}
-
-void ModelImplMac::CreateCompilation() {
-  std::cout << "ModelImplMac::CreateCompilation";
-
-  // CompilationImplMac object need to be free.
-  auto impl = new CompilationImplMac(this);
-  impl->Finish(PREFER_SUSTAINED_SPEED);
-}
+//
+//CompilationImplMac* ModelImplMac::CreateCompilation() {
+//  std::cout << "ModelImplMac::CreateCompilation";
+//
+//}
 
 }  // namespace ml

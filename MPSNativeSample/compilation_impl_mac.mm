@@ -38,8 +38,6 @@ CompilationImplMac::~CompilationImplMac() {
 void CompilationImplMac::Finish(int32_t preference) {
   if (@available(macOS 10.13, *)) {
     CompileModelWithMPS();
-    auto impl = std::make_unique<ExecutionImplMacMPS>(this);
-    impl->StartCompute();
   }
 }
 
