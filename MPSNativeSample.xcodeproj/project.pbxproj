@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B440B1C220319AE00CCCE0F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B1B220319AE00CCCE0F /* main.cpp */; };
+		5B440B4E2212B75D00CCCE0F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B4D2212B75D00CCCE0F /* main.cpp */; };
+		5B440B512212B7C000CCCE0F /* mpscnn_context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B502212B7C000CCCE0F /* mpscnn_context.mm */; };
+		5B440B6D2212BA6800CCCE0F /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B440B6C2212BA6800CCCE0F /* Metal.framework */; };
+		5B440B7D2212BA9E00CCCE0F /* compilation_impl_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B702212BA9D00CCCE0F /* compilation_impl_mac.mm */; };
+		5B440B7E2212BA9E00CCCE0F /* mps_protocols_impl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B722212BA9D00CCCE0F /* mps_protocols_impl.mm */; };
+		5B440B7F2212BA9E00CCCE0F /* model_impl_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B772212BA9E00CCCE0F /* model_impl_mac.mm */; };
+		5B440B802212BA9E00CCCE0F /* compilation_impl_mac_mps.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B792212BA9E00CCCE0F /* compilation_impl_mac_mps.mm */; };
+		5B440B812212BA9E00CCCE0F /* common.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B7A2212BA9E00CCCE0F /* common.cc */; };
+		5B440B822212BA9E00CCCE0F /* execution_impl_mac_mps.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B7B2212BA9E00CCCE0F /* execution_impl_mac_mps.mm */; };
+		5B440B832212BA9E00CCCE0F /* ml_utils_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B7C2212BA9E00CCCE0F /* ml_utils_mac.mm */; };
+		5B440B852212BADC00CCCE0F /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B440B842212BADC00CCCE0F /* MetalPerformanceShaders.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +34,26 @@
 
 /* Begin PBXFileReference section */
 		5B440B18220319AE00CCCE0F /* MPSNativeSample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MPSNativeSample; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B440B1B220319AE00CCCE0F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5B440B4D2212B75D00CCCE0F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5B440B4F2212B7C000CCCE0F /* mpscnn_context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mpscnn_context.h; sourceTree = "<group>"; };
+		5B440B502212B7C000CCCE0F /* mpscnn_context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mpscnn_context.mm; sourceTree = "<group>"; };
+		5B440B6C2212BA6800CCCE0F /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		5B440B6E2212BA9D00CCCE0F /* compilation_impl_mac_mps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compilation_impl_mac_mps.h; sourceTree = "<group>"; };
+		5B440B6F2212BA9D00CCCE0F /* compilation_impl_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compilation_impl_mac.h; sourceTree = "<group>"; };
+		5B440B702212BA9D00CCCE0F /* compilation_impl_mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = compilation_impl_mac.mm; sourceTree = "<group>"; };
+		5B440B712212BA9D00CCCE0F /* model_impl_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model_impl_mac.h; sourceTree = "<group>"; };
+		5B440B722212BA9D00CCCE0F /* mps_protocols_impl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mps_protocols_impl.mm; sourceTree = "<group>"; };
+		5B440B732212BA9D00CCCE0F /* execution_impl_mac_mps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = execution_impl_mac_mps.h; sourceTree = "<group>"; };
+		5B440B742212BA9D00CCCE0F /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		5B440B752212BA9E00CCCE0F /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		5B440B762212BA9E00CCCE0F /* ml_utils_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ml_utils_mac.h; sourceTree = "<group>"; };
+		5B440B772212BA9E00CCCE0F /* model_impl_mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = model_impl_mac.mm; sourceTree = "<group>"; };
+		5B440B782212BA9E00CCCE0F /* mps_protocols_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mps_protocols_impl.h; sourceTree = "<group>"; };
+		5B440B792212BA9E00CCCE0F /* compilation_impl_mac_mps.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = compilation_impl_mac_mps.mm; sourceTree = "<group>"; };
+		5B440B7A2212BA9E00CCCE0F /* common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cc; sourceTree = "<group>"; };
+		5B440B7B2212BA9E00CCCE0F /* execution_impl_mac_mps.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = execution_impl_mac_mps.mm; sourceTree = "<group>"; };
+		5B440B7C2212BA9E00CCCE0F /* ml_utils_mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ml_utils_mac.mm; sourceTree = "<group>"; };
+		5B440B842212BADC00CCCE0F /* MetalPerformanceShaders.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalPerformanceShaders.framework; path = System/Library/Frameworks/MetalPerformanceShaders.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B440B852212BADC00CCCE0F /* MetalPerformanceShaders.framework in Frameworks */,
+				5B440B6D2212BA6800CCCE0F /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +74,7 @@
 			children = (
 				5B440B1A220319AE00CCCE0F /* MPSNativeSample */,
 				5B440B19220319AE00CCCE0F /* Products */,
+				5B440B6B2212BA6800CCCE0F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +89,35 @@
 		5B440B1A220319AE00CCCE0F /* MPSNativeSample */ = {
 			isa = PBXGroup;
 			children = (
-				5B440B1B220319AE00CCCE0F /* main.cpp */,
+				5B440B7A2212BA9E00CCCE0F /* common.cc */,
+				5B440B752212BA9E00CCCE0F /* common.h */,
+				5B440B6E2212BA9D00CCCE0F /* compilation_impl_mac_mps.h */,
+				5B440B792212BA9E00CCCE0F /* compilation_impl_mac_mps.mm */,
+				5B440B6F2212BA9D00CCCE0F /* compilation_impl_mac.h */,
+				5B440B702212BA9D00CCCE0F /* compilation_impl_mac.mm */,
+				5B440B742212BA9D00CCCE0F /* constants.h */,
+				5B440B732212BA9D00CCCE0F /* execution_impl_mac_mps.h */,
+				5B440B7B2212BA9E00CCCE0F /* execution_impl_mac_mps.mm */,
+				5B440B762212BA9E00CCCE0F /* ml_utils_mac.h */,
+				5B440B7C2212BA9E00CCCE0F /* ml_utils_mac.mm */,
+				5B440B712212BA9D00CCCE0F /* model_impl_mac.h */,
+				5B440B772212BA9E00CCCE0F /* model_impl_mac.mm */,
+				5B440B782212BA9E00CCCE0F /* mps_protocols_impl.h */,
+				5B440B722212BA9D00CCCE0F /* mps_protocols_impl.mm */,
+				5B440B4F2212B7C000CCCE0F /* mpscnn_context.h */,
+				5B440B502212B7C000CCCE0F /* mpscnn_context.mm */,
+				5B440B4D2212B75D00CCCE0F /* main.cpp */,
 			);
 			path = MPSNativeSample;
+			sourceTree = "<group>";
+		};
+		5B440B6B2212BA6800CCCE0F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B440B842212BADC00CCCE0F /* MetalPerformanceShaders.framework */,
+				5B440B6C2212BA6800CCCE0F /* Metal.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +176,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B440B1C220319AE00CCCE0F /* main.cpp in Sources */,
+				5B440B802212BA9E00CCCE0F /* compilation_impl_mac_mps.mm in Sources */,
+				5B440B832212BA9E00CCCE0F /* ml_utils_mac.mm in Sources */,
+				5B440B812212BA9E00CCCE0F /* common.cc in Sources */,
+				5B440B512212B7C000CCCE0F /* mpscnn_context.mm in Sources */,
+				5B440B4E2212B75D00CCCE0F /* main.cpp in Sources */,
+				5B440B7E2212BA9E00CCCE0F /* mps_protocols_impl.mm in Sources */,
+				5B440B822212BA9E00CCCE0F /* execution_impl_mac_mps.mm in Sources */,
+				5B440B7D2212BA9E00CCCE0F /* compilation_impl_mac.mm in Sources */,
+				5B440B7F2212BA9E00CCCE0F /* model_impl_mac.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -248,6 +315,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

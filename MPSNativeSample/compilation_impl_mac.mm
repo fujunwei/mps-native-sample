@@ -24,15 +24,11 @@ CompilationImplMac::CompilationImplMac(ModelImplMac* model)
   operations_.reserve(model->operations_.size());
   for (uint32_t i = 0; i < model->operations_.size(); ++i) {
     OperationMac operation(model->operations_[i]);
-    operation.filter = nullptr;
     operations_.push_back(operation);
   }
   values_ = model->values_;
   inputs_ = model->inputs_;
   outputs_ = model->outputs_;
-  memory_size_ = model->memory_size_;
-  memory_.reset(new int8_t[memory_size_]);
-  memcpy(memory_.get(), model->memory_.get(), memory_size_);
   is_bnns_ = true;
 }
 
@@ -41,8 +37,9 @@ CompilationImplMac::~CompilationImplMac() {
 
 void CompilationImplMac::Finish(int32_t preference) {
   if (@available(macOS 10.13, *)) {
-      CompileModelWithMPS();
-      auto impl = std::make_unique<ExecutionImplMacMPS>(this);
+    CompileModelWithMPS();
+    auto impl = std::make_unique<ExecutionImplMacMPS>(this);
+    impl->StartCompute();
   }
 }
 

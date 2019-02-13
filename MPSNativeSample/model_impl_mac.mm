@@ -24,30 +24,14 @@ int32_t ModelImplMac::AddOperand(int32_t type, const std::vector<uint32_t>& dime
   return NOT_ERROR;
 }
 
-//int32_t ModelImplMac::SetOperandValue(uint32_t index, const void* buffer, uint32_t length) {
-//  if (index >= operands_.size()) {
-//    return BAD_DATA;
-//  }
-//  auto operand = operands_[index];
-//  if (operand.type == TENSOR_FLOAT32 || operand.type == FLOAT32) {
-//    const float* value = static_cast<const float*>(buffer);
-//    uint32_t size = length / 4;
-//  } else if (operand.type == TENSOR_INT32 || operand.type == INT32) {
-//    const int32_t* value = static_cast<const int32_t*>(buffer);
-//    uint32_t size = length / 4;
-//  } else if (operand.type == TENSOR_QUANT8_ASYMM) {
-//    const int8_t* value = static_cast<const int8_t*>(buffer);
-//    uint32_t size = length;
-//  } else if (operand.type == UINT32) {
-//    const uint32_t* value = static_cast<const uint32_t*>(buffer);
-//    uint32_t size = length;
-//  } else {
-//    // TODO: change the date type of operand type to enum
-//    std::cout << "Invalid operand type: " << operand.type;
-//    return BAD_DATA;
-//  }
-//  return NOT_ERROR;
-//}
+int32_t ModelImplMac::SetOperandValue(uint32_t index, const std::vector<float>& data) {
+  ValueInfo value;
+  value.index = index;
+  value.data = data;
+  values_[index] = value;
+  
+  return NOT_ERROR;
+}
 
 int32_t ModelImplMac::AddOperation(int32_t type, const std::vector<uint32_t>& inputs, const std::vector<uint32_t>& outputs) {
   std::cout << "  ModelImplMac::AddOperation";

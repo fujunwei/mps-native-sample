@@ -8,7 +8,6 @@
 // The header file can't be included, otherwise the declaration of
 // MPSCNNKernel will be used.
 // #import <MetalPerformanceShaders/MetalPerformanceShaders.h>
-#import <Accelerate/Accelerate.h>
 #include <map>
 #include <memory>
 #include <vector>
@@ -41,7 +40,6 @@ struct OperationMac : public Operation {
   explicit OperationMac(const OperationMac&);
   explicit OperationMac(const Operation&);
   ~OperationMac();
-  ::BNNSFilter filter;
   LocalOperation local_operation;
 
   int fuse_code;
@@ -78,12 +76,12 @@ bool ParameterExtracterForConv(const OperationMac&,
                                int32_t&,
                                bool depthwise = false);
 
-void SetupOperandInfoForOperands(
-    std::vector<std::unique_ptr<OperandInfo>>& opearnd_info_array,
-    std::vector<OperandMac>& operands,
-    const std::vector<uint32_t>& operands_index_array,
-     const std::map<uint32_t, ValueInfo>& values,
-     const std::unique_ptr<int8_t[]>& memory);
+//void SetupOperandInfoForOperands(
+//    std::vector<std::unique_ptr<OperandInfo>>& opearnd_info_array,
+//    std::vector<OperandMac>& operands,
+//    const std::vector<uint32_t>& operands_index_array,
+//     const std::map<uint32_t, ValueInfo>& values,
+//     const std::unique_ptr<int8_t[]>& memory);
 
 }  // namespace ml
 

@@ -24,23 +24,24 @@ struct Operand {
   int32_t zeroPoint;
 };
 
-struct OperandInfo {
-  // The vaule of input is set by oneself like setOperandValue, so offset = 0
-  // mojo::ScopedSharedBufferMapping => void*
-  OperandInfo(uint32_t length, void* mapping);
-  ~OperandInfo();
-  uint32_t offset;
-  uint32_t length;
-  void* mapping;
-};
+//struct OperandInfo {
+//  // The vaule of input is set by oneself like setOperandValue, so offset = 0
+//  // mojo::ScopedSharedBufferMapping => void*
+//  OperandInfo(uint32_t length, void* mapping);
+//  ~OperandInfo();
+//  uint32_t offset;
+//  uint32_t length;
+//  void* mapping;
+//};
 
 struct ValueInfo {
   ValueInfo();
   ~ValueInfo();
   ValueInfo(const ValueInfo&);
   uint32_t index;
-  uint32_t offset;
-  uint32_t length;
+//  uint32_t offset;
+//  uint32_t length;
+  std::vector<float> data;
 };
 
 struct Operation {

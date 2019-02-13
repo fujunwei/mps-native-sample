@@ -93,12 +93,12 @@ ExecutionImplMacMPS::ExecutionImplMacMPS(
     CompilationImplMac* compilation) {
   compilation_ = compilation;
   // Inputs data with setOperandValue.
-  SetupOperandInfoForOperands(inputs_info_, compilation_->operands_,
-                              compilation_->inputs_, compilation_->values_,
-                              compilation_->memory_);
-  SetupOperandInfoForOperands(outputs_info_, compilation_->operands_,
-                              compilation_->outputs_, compilation_->values_,
-                              compilation_->memory_);
+//  SetupOperandInfoForOperands(inputs_info_, compilation_->operands_,
+//                              compilation_->inputs_, compilation_->values_,
+//                              compilation_->memory_);
+//  SetupOperandInfoForOperands(outputs_info_, compilation_->operands_,
+//                              compilation_->outputs_, compilation_->values_,
+//                              compilation_->memory_);
 
   if (@available(macOS 10.13, *)) {
     SetupMPSImageForOperands(input_mpsimages_, input_mtlbuffers_,
@@ -112,9 +112,7 @@ ExecutionImplMacMPS::ExecutionImplMacMPS(
 ExecutionImplMacMPS::~ExecutionImplMacMPS() = default;
 
 bool ExecutionImplMacMPS::IsValid() const {
-  bool valid = compilation_ != nil &&
-               inputs_info_.size() == compilation_->inputs_.size() &&
-               outputs_info_.size() == compilation_->outputs_.size();
+  bool valid = true;
   if (compilation_) {
     if (@available(macOS 10.13, *)) {
       valid &= compilation_->inputs_.size() == input_mpsimages_.size() &&
@@ -169,11 +167,12 @@ void ExecutionImplMacMPS::StartCompute() {
         NSMutableArray<MPSImage*>* image_array =
             [NSMutableArray arrayWithCapacity:1];
         for (size_t i = 0; i < compilation_->inputs_.size(); ++i) {
-          std::unique_ptr<OperandInfo>& input_data = inputs_info_[i];
+//          std::unique_ptr<OperandInfo>& input_data = inputs_info_[i];
           MPSImage* mps_img = input_mpsimages_[i];
           const id<MTLBuffer> mtl_buffer = input_mtlbuffers_[i];
+          int input_index = compilation_->inputs_[i];
           UploadToMPSImage(mps_img, mtl_buffer, command_buffer,
-                           input_data->mapping, input_data->length);
+                           compilation_->values_[input_index].data);
           [image_array addObject:mps_img];
         }
 
@@ -189,10 +188,7 @@ void ExecutionImplMacMPS::StartCompute() {
               compilation_->values_[compilation_->constants_[i]];
           MPSImage* mps_img = constant_mpsimages_[i];
           const id<MTLBuffer> mtl_buffer = constant_mtlbuffers_[i];
-          const void* cpu_buffer = static_cast<const void*>(
-              compilation_->memory_.get() + value_info.offset);
-          UploadToMPSImage(mps_img, mtl_buffer, command_buffer, cpu_buffer,
-                           value_info.length);
+          UploadToMPSImage(mps_img, mtl_buffer, command_buffer, value_info.data);
           [image_array addObject:mps_img];
         }
 
@@ -263,10 +259,16 @@ void ExecutionImplMacMPS::StartCompute() {
         [command_buffer waitUntilCompleted];
 
         for (size_t i = 0; i < compilation_->outputs_.size(); ++i) {
-          std::unique_ptr<OperandInfo>& output_data = outputs_info_[i];
+//          std::unique_ptr<OperandInfo>& output_data = outputs_info_[i];
+          int output_index = compilation_->outputs_[i];
+          ValueInfo& output_data = compilation_->values_[output_index];
+          float* data = (float*) malloc(output_data.data.size() * sizeof(float));
           id<MTLBuffer> output_buffer = output_mtlbuffers_[i];
-          memcpy(output_data->mapping, [output_buffer contents],
-                 output_data->length);
+          memcpy(data, [output_buffer contents],
+                 output_data.data.size() * sizeof(float));
+          for (size_t j = 0; j < output_data.data.size(); ++j) {
+            std::cout << " ==== " << data[j] << "\n";
+          }
         }
       }  // @autoreleasepool
     } while (0);
@@ -277,10 +279,9 @@ void ExecutionImplMacMPS::UploadToMPSImage(
     const MPSImage* mps_image,
     const id<MTLBuffer>& mtl_buffer,
     const id<MTLCommandBuffer>& command_buffer,
-    const void* cpu_buffer,
-    size_t length) {
+    const std::vector<float>& data) {
   if (@available(macOS 10.13, *)) {
-    memcpy([mtl_buffer contents], cpu_buffer, length);
+    memcpy([mtl_buffer contents], data.data(), data.size() * sizeof(float));
     id<MTLComputeCommandEncoder> encoder =
         [command_buffer computeCommandEncoder];
     id<MTLComputePipelineState> state =

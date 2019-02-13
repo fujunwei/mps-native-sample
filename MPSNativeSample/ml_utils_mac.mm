@@ -102,20 +102,20 @@ bool ParameterExtracterForConv(const OperationMac& operation,
   return true;
 }
 
-void SetupOperandInfoForOperands(
-    std::vector<std::unique_ptr<OperandInfo>>& opearnd_info_array,
-    std::vector<OperandMac>& operands,
-    const std::vector<uint32_t>& operands_index_array,
-     const std::map<uint32_t, ValueInfo>& values,
-     const std::unique_ptr<int8_t[]>& memory) {
-  for (size_t i = 0; i < operands_index_array.size(); ++i) {
-    const uint32_t length = operands[operands_index_array[i]].requiredSize();
-    ValueInfo value_info = values.at(operands_index_array[i]);
-    void* new_memory =
-        reinterpret_cast<void*>(memory.get() + value_info.offset);
-    std::unique_ptr<OperandInfo> info(
-        new OperandInfo(length, new_memory));
-    opearnd_info_array.push_back(std::move(info));
-  }
-}
+//void SetupOperandInfoForOperands(
+//    std::vector<std::unique_ptr<OperandInfo>>& opearnd_info_array,
+//    std::vector<OperandMac>& operands,
+//    const std::vector<uint32_t>& operands_index_array,
+//     const std::map<uint32_t, ValueInfo>& values,
+//     const std::unique_ptr<int8_t[]>& memory) {
+//  for (size_t i = 0; i < operands_index_array.size(); ++i) {
+//    const uint32_t length = operands[operands_index_array[i]].requiredSize();
+//    ValueInfo value_info = values.at(operands_index_array[i]);
+//    void* new_memory =
+//        reinterpret_cast<void*>(memory.get() + value_info.offset);
+//    std::unique_ptr<OperandInfo> info(
+//        new OperandInfo(length, new_memory));
+//    opearnd_info_array.push_back(std::move(info));
+//  }
+//}
 }

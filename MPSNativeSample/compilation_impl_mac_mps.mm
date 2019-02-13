@@ -153,10 +153,14 @@ bool CompileConv2DOrDepthwiseConv2D(
   MPSCNNNeuron* relu = CreateMPSCNNNeuron(fuse_code);
 
   ValueInfo weights_value_info = values.at(inputs[1]);
-  float* weights = (float*)(memory.get() + weights_value_info.offset);
+  size_t weights_size = weights_value_info.data.size() * sizeof(float);
+  float* weights = (float*) malloc(weights_size);
+  memcpy(weights, weights_value_info.data.data(), weights_size);
+  
   ValueInfo bias_value_info = values.at(inputs[2]);
-  const float* bias =
-      reinterpret_cast<const float*>(memory.get() + bias_value_info.offset);
+  size_t bias_size = bias_value_info.data.size() * sizeof(float);
+  float* bias = (float*) malloc(bias_size);
+  memcpy(bias, bias_value_info.data.data(), bias_size);
 
   MPSNNImageNode* input_image = image_nodes[inputs[0]];
   if (depthwise) {
@@ -183,7 +187,7 @@ bool CompileConv2DOrDepthwiseConv2D(
         }
       }
     }
-    memcpy(weights, depthwise_weights.data(), weights_value_info.length);
+    memcpy(weights, depthwise_weights.data(), weights_value_info.data.size() * sizeof(float));
   }
   MPSCNNConvolutionNode* conv_node = CreateMPSCNNConvolutionNode(
       input_image, filter_width, filter_height, depth_in, depth_out,
@@ -522,12 +526,10 @@ bool CompileFullyConnected(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
 
   // inputs[1] is index of weights, values_.at(inputs[1]) is value info
   // of weights.
-  const float* source_weights = reinterpret_cast<const float*>(
-      memory.get() + values.at(inputs[1]).offset);
+  const float* source_weights = values.at(inputs[1]).data.data();
   // inputs[2] is index of bias, values_.at(inputs[2]) is value info of
   // bias.
-  const float* source_bias = reinterpret_cast<const float*>(
-      memory.get() + values.at(inputs[2]).offset);
+  const float* source_bias = values.at(inputs[2]).data.data();
 
   // the output_size is the same as first dimension of weights.
   int32_t output_size = operands[operation.outputs[0]].dimensions[1];

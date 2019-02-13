@@ -41,19 +41,18 @@ uint32_t Operand::requiredSize() const {
 Operation::Operation() = default;
 Operation::~Operation() = default;
 Operation::Operation(const Operation&) = default;
-
-OperandInfo::OperandInfo(uint32_t length, void* mapping) :
-      length(length), mapping(std::move(mapping)) {}
-
-OperandInfo::~OperandInfo() {}
+//
+//OperandInfo::OperandInfo(uint32_t length, void* mapping) :
+//      length(length), mapping(std::move(mapping)) {}
+//
+//OperandInfo::~OperandInfo() {}
 
 ValueInfo::ValueInfo() = default;
 ValueInfo::~ValueInfo() = default;
 ValueInfo::ValueInfo(const ValueInfo&) = default;
 
 int32_t getScalarInt32(const ValueInfo& info, int8_t* memory) {
-  int32_t* ptr = reinterpret_cast<int32_t*>(memory + info.offset);
-  return ptr[0];
+  return info.data[0];
 }
 
 // There are no viable overloaded operator[] for type
@@ -71,8 +70,7 @@ int32_t getScalarInt32(const std::map<uint32_t, ValueInfo>& values,
 }
 
 float getScalarFloat(const ValueInfo& info, int8_t* memory) {
-  float* ptr = reinterpret_cast<float*>(memory + info.offset);
-  return ptr[0];
+  return info.data[0];
 }
 
 float getScalarFloat(const std::map<uint32_t, ValueInfo>& values,

@@ -8,6 +8,8 @@
 #include <map>
 #include <memory>
 #include <vector>
+#include <AvailabilityMacros.h>
+#import <os/availability.h>
 
 #include "common.h"
 #include "ml_utils_mac.h"
@@ -18,7 +20,7 @@ class CompilationImplMac;
 
 namespace ml {
 
-API_AVAILABLE(macosx(10.13))
+
 bool CompileConv2DOrDepthwiseConv2D(
     std::map<uint32_t, MPSNNImageNode*>& image_nodes,
     const OperationMac&,
@@ -26,14 +28,14 @@ bool CompileConv2DOrDepthwiseConv2D(
     std::unique_ptr<int8_t[]>& memory,
     const std::vector<OperandMac>& operands);
 
-API_AVAILABLE(macosx(10.13))
+
 bool CompileAverageOrMaxPool2D(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                                const OperationMac& operation,
                                const std::map<uint32_t, ValueInfo>& values,
                                const std::unique_ptr<int8_t[]>& memory,
                                const std::vector<OperandMac>& operands);
 
-API_AVAILABLE(macosx(10.13))
+
 bool CompileSoftmax(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                     const OperationMac& operation,
                     const std::map<uint32_t, ValueInfo>& values,
@@ -42,7 +44,7 @@ bool CompileSoftmax(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
 bool CompileReshape(std::vector<OperationMac>& operations,
                     const OperationMac& reshape);
 
-API_AVAILABLE(macosx(10.13))
+
 bool CompileConcatenation(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           std::vector<OperationMac>& operations,
                           const OperationMac& concat,
@@ -50,7 +52,7 @@ bool CompileConcatenation(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           const std::unique_ptr<int8_t[]>& memory,
                           const std::vector<OperandMac>& operands);
 
-API_AVAILABLE(macosx(10.13))
+
 bool CompileArithmetic(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                        const OperationMac& operation,
                        const std::vector<OperandMac>& operands,
@@ -58,14 +60,14 @@ bool CompileArithmetic(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                        const std::map<uint32_t, ValueInfo>& values,
                        const std::unique_ptr<int8_t[]>& memory);
 
-API_AVAILABLE(macosx(10.13))
+
 bool CompileFullyConnected(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                            OperationMac&,
                            std::vector<OperandMac>& operands,
                            const std::map<uint32_t, ValueInfo>& values,
                            const std::unique_ptr<int8_t[]>& memory);
 
-API_AVAILABLE(macosx(10.13))
+
 bool CompileBilinearScale(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           OperationMac&,
                           const std::vector<OperandMac>& operands,

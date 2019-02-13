@@ -38,13 +38,12 @@ class ExecutionImplMacMPS {
   void API_AVAILABLE(macos(10_13)) UploadToMPSImage(const MPSImage*,
                                                     const id<MTLBuffer>&,
                                                     const id<MTLCommandBuffer>&,
-                                                    const void*,
-                                                    size_t);
+                                                    const std::vector<float>& data);
 
   CompilationImplMac* compilation_;
 
-  std::vector<std::unique_ptr<OperandInfo>> inputs_info_;
-  std::vector<std::unique_ptr<OperandInfo>> outputs_info_;
+//  std::vector<std::unique_ptr<OperandInfo>> inputs_info_;
+//  std::vector<std::unique_ptr<OperandInfo>> outputs_info_;
 
   API_AVAILABLE(macos(10_13))
   std::vector<MPSImage*> input_mpsimages_;
