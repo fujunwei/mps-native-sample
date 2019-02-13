@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#include "test_cases.h"
+#include "depthwise_conv_test.h"
 
 #include <iostream>
 #include <vector>
@@ -14,37 +14,42 @@
 
 namespace ml {
 
-void ConvFloat() {
-  std::vector<float> expected_data = {0.875, 0.875, 0.875, 0.875};
+void DepthwiseConv2dFloatLarge() {
   auto model = std::make_unique<ModelImplMac>();
-  
-  std::vector<uint32_t> dimensions0 = {1, 3, 3, 1};
-  std::vector<uint32_t> dimensions1 = {1, 2, 2, 1};
-  std::vector<uint32_t> dimensions2 = {1};
-  
   uint32_t operandIndex = 0;
+  
+  std::vector<float> op1_value = {10, 21, 10, 22, 10, 23, 10, 24};
+  std::vector<float> expected_data = {110, 246};
+  
+  std::vector<uint32_t> dimensions0 = {1, 2, 2, 2};
+  std::vector<uint32_t> dimensions1 = {2};
+  std::vector<uint32_t> dimensions3 = {1, 1, 1, 2};
+  
   uint32_t op1 = operandIndex++;
   model->AddOperand(TENSOR_FLOAT32, dimensions0, 0, 0);
   uint32_t op2 = operandIndex++;
-  model->AddOperand(TENSOR_FLOAT32, dimensions1, 0, 0);
+  model->AddOperand(TENSOR_FLOAT32, dimensions0, 0, 0);
   uint32_t op3 = operandIndex++;
-  model->AddOperand(TENSOR_FLOAT32, dimensions2, 0, 0);
+  model->AddOperand(TENSOR_FLOAT32, dimensions1, 0, 0);
   uint32_t pad0 = operandIndex++;
   model->AddOperand(INT32, {}, 0, 0);
   uint32_t act = operandIndex++;
   model->AddOperand(INT32, {}, 0, 0);
   uint32_t stride = operandIndex++;
   model->AddOperand(INT32, {}, 0, 0);
+  uint32_t channelMultiplier = operandIndex++;
+  model->AddOperand(INT32, {}, 0, 0);
   uint32_t op4 = operandIndex++;
-  model->AddOperand(TENSOR_FLOAT32, dimensions1, 0, 0);
+  model->AddOperand(TENSOR_FLOAT32, dimensions3, 0, 0);
   
-  model->SetOperandValue(op1, {1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 1.0});
-  model->SetOperandValue(op2, {0.25, 0.25, 0.25, 0.25});
-  model->SetOperandValue(op3, {0});
+  model->SetOperandValue(op1, op1_value);
+  model->SetOperandValue(op2, {0.25, 0, 0.25, 1, 0.25, 0, 0.25, 1});
+  model->SetOperandValue(op3, {100, 200});
   model->SetOperandValue(pad0, {0});
   model->SetOperandValue(act, {0});
   model->SetOperandValue(stride, {1});
-  model->AddOperation(CONV_2D, {op1, op2, op3, pad0, pad0, pad0, pad0, stride, stride, act}, {op4});
+  model->SetOperandValue(channelMultiplier, {1});
+  model->AddOperation(DEPTHWISE_CONV_2D, {op1, op2, op3, pad0, pad0, pad0, pad0, stride, stride, channelMultiplier, act}, {op4});
   
   model->IdentifyInputsAndOutputs({op1}, {op4});
   

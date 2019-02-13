@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#ifndef SERVICES_ML_TEST_CASES_H_
-#define SERVICES_ML_TEST_CASES_H_
+#ifndef SERVICES_ML_DEPTHWISE_CONV_TEST_H_
+#define SERVICES_ML_DEPTHWISE_CONV_TEST_H_
 
 namespace ml {
 
-void ConvFloat();
+void DepthwiseConv2dFloatLarge();
 
 }  // namespace ml
 
-#endif  // SERVICES_ML_TEST_CASES_H_
+#endif  // SERVICES_ML_DEPTHWISE_CONV_TEST_H_

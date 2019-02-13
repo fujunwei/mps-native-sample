@@ -189,6 +189,12 @@ bool CompileConv2DOrDepthwiseConv2D(
     }
     memcpy(weights, depthwise_weights.data(), weights_value_info.data.size() * sizeof(float));
   }
+  for (size_t i = 0; i < weights_value_info.data.size(); ++i) {
+    std::cout << "\n==== weights " << weights[i];
+  }
+  for (size_t i = 0; i < bias_value_info.data.size(); ++i) {
+    std::cout << "\n==== bias " << bias[i];
+  }
   MPSCNNConvolutionNode* conv_node = CreateMPSCNNConvolutionNode(
       input_image, filter_width, filter_height, depth_in, depth_out,
       stride_width, stride_height, weights, bias, relu, operation.type,

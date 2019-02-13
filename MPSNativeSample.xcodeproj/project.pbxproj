@@ -19,6 +19,7 @@
 		5B440B832212BA9E00CCCE0F /* ml_utils_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440B7C2212BA9E00CCCE0F /* ml_utils_mac.mm */; };
 		5B440B852212BADC00CCCE0F /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B440B842212BADC00CCCE0F /* MetalPerformanceShaders.framework */; };
 		5B440BA52213AE2100CCCE0F /* test_cases.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440BA42213AE2100CCCE0F /* test_cases.mm */; };
+		5B440BA82213BA4600CCCE0F /* depthwise_conv_test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440BA72213BA4500CCCE0F /* depthwise_conv_test.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +58,8 @@
 		5B440B842212BADC00CCCE0F /* MetalPerformanceShaders.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalPerformanceShaders.framework; path = System/Library/Frameworks/MetalPerformanceShaders.framework; sourceTree = SDKROOT; };
 		5B440BA32213AE2100CCCE0F /* test_cases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_cases.h; sourceTree = "<group>"; };
 		5B440BA42213AE2100CCCE0F /* test_cases.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = test_cases.mm; sourceTree = "<group>"; };
+		5B440BA62213BA4500CCCE0F /* depthwise_conv_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = depthwise_conv_test.h; sourceTree = "<group>"; };
+		5B440BA72213BA4500CCCE0F /* depthwise_conv_test.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = depthwise_conv_test.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 		5B440B1A220319AE00CCCE0F /* MPSNativeSample */ = {
 			isa = PBXGroup;
 			children = (
+				5B440BA62213BA4500CCCE0F /* depthwise_conv_test.h */,
+				5B440BA72213BA4500CCCE0F /* depthwise_conv_test.mm */,
 				5B440BA32213AE2100CCCE0F /* test_cases.h */,
 				5B440BA42213AE2100CCCE0F /* test_cases.mm */,
 				5B440B7A2212BA9E00CCCE0F /* common.cc */,
@@ -182,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B440B802212BA9E00CCCE0F /* compilation_impl_mac_mps.mm in Sources */,
+				5B440BA82213BA4600CCCE0F /* depthwise_conv_test.mm in Sources */,
 				5B440B832212BA9E00CCCE0F /* ml_utils_mac.mm in Sources */,
 				5B440B812212BA9E00CCCE0F /* common.cc in Sources */,
 				5B440B512212B7C000CCCE0F /* mpscnn_context.mm in Sources */,
