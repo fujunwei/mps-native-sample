@@ -115,8 +115,6 @@ bool CompileConv2DOrDepthwiseConv2D(
     const std::map<uint32_t, ValueInfo>& values,
     std::unique_ptr<int8_t[]>& memory,
     const std::vector<OperandMac>& operands) {
-  std::cout << "CompilationImplMac::CompileConv2DOrDepthwiseConv2D "
-             << operation.type;
   int32_t input_batch_size, input_width, input_height, output_width,
       output_height;
   bool implicit_padding;
@@ -189,12 +187,6 @@ bool CompileConv2DOrDepthwiseConv2D(
     }
     memcpy(weights, depthwise_weights.data(), weights_value_info.data.size() * sizeof(float));
   }
-  for (size_t i = 0; i < weights_value_info.data.size(); ++i) {
-    std::cout << "\n==== weights " << weights[i];
-  }
-  for (size_t i = 0; i < bias_value_info.data.size(); ++i) {
-    std::cout << "\n==== bias " << bias[i];
-  }
   MPSCNNConvolutionNode* conv_node = CreateMPSCNNConvolutionNode(
       input_image, filter_width, filter_height, depth_in, depth_out,
       stride_width, stride_height, weights, bias, relu, operation.type,
@@ -211,8 +203,6 @@ bool CompileConv2DOrDepthwiseConv2D(
     offset.y = (int)(filter_height / 2) - padding_top;
     offset.z = 0;
   }
-  std::cout << "    offset MPSOffset(x: " << offset.x << " y: " << offset.y
-             << ")";
 
   uint32_t n, width, height, channels;
   // operands[outputs[0]] is output operand.
@@ -236,7 +226,6 @@ bool CompileAverageOrMaxPool2D(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                                const std::map<uint32_t, ValueInfo>& values,
                                const std::unique_ptr<int8_t[]>& memory,
                                const std::vector<OperandMac>& operands) {
-  std::cout << "CompilationImplMac::CompileAverageOrMaxPool2D";
   bool implicit_padding;
   int32_t padding_left, padding_right, padding_top, padding_bottom;
   int32_t padding_code;
@@ -251,11 +240,6 @@ bool CompileAverageOrMaxPool2D(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
   const OperandMac& input = operands[input_idx];
   const int32_t input_height = input.dimensions[1];
   const int32_t input_width = input.dimensions[2];
-
-  std::cout << "  input_height: " << input_height
-             << " input_width: " << input_width;
-  std::cout << "  output_height: " << output_height
-             << " output_width: " << output_width;
 
   if (inputs.size() == 10) {
     implicit_padding = false;
@@ -279,12 +263,6 @@ bool CompileAverageOrMaxPool2D(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
   const int32_t filter_height =
       getScalarInt32(values, inputs[i++], memory.get());
   const int32_t fuse_code = getScalarInt32(values, inputs[i++], memory.get());
-
-  std::cout << "  stride_width: " << stride_width;
-  std::cout << "  stride_height: " << stride_height;
-  std::cout << "  filter_height: " << filter_height;
-  std::cout << "  filter_width: " << filter_width;
-  std::cout << "  fuse_code: " << fuse_code;
 
   if (fuse_code != FUSED_NONE) {
     std::cout << "  fuse_code " << fuse_code << " is not supproted.";
@@ -320,7 +298,6 @@ bool CompileAverageOrMaxPool2D(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
     offset.y = (int)(filter_height / 2) - padding_top;
     offset.z = 0;
   }
-  std::cout << "  MPSOffset x: " << offset.x << " y: " << offset.y;
 
   uint32_t n, width, height, channels;
   if (!GetMPSImageInfo(output, n, width, height, channels))
@@ -342,9 +319,7 @@ bool CompileSoftmax(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                     const OperationMac& operation,
                     const std::map<uint32_t, ValueInfo>& values,
                     const std::unique_ptr<int8_t[]>& memory) {
-  std::cout << "CompilationImplMac::CompileSoftmax";
   float beta = getScalarFloat(values, operation.inputs[1], memory.get());
-  std::cout << "  beta: " << beta;
   if (beta != 1.0) {
     std::cout << "  beta " << beta << " is not supported.";
     return false;
@@ -359,9 +334,6 @@ bool CompileSoftmax(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
 
 bool CompileReshape(std::vector<OperationMac>& operations,
                     const OperationMac& reshape) {
-  std::cout << "CompilationImplMac::CompileReshape";
-
-  std::cout << "  Reshape is compiled to no-op";
   uint32_t reshape_input_idx = reshape.inputs[0];
   uint32_t reshape_output_idx = reshape.outputs[0];
   for (size_t i = 0; i < operations.size(); ++i) {
@@ -384,8 +356,6 @@ bool CompileConcatenation(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           const std::map<uint32_t, ValueInfo>& values,
                           const std::unique_ptr<int8_t[]>& memory,
                           const std::vector<OperandMac>& operands) {
-  std::cout << "CompilationImplMac::CompileConcatenation";
-
   std::vector<uint32_t> inputs = concat.inputs;
   std::vector<uint32_t> outputs = concat.outputs;
 
@@ -427,7 +397,6 @@ bool CompileArithmetic(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                        std::vector<uint32_t>& constants,
                        const std::map<uint32_t, ValueInfo>& values,
                        const std::unique_ptr<int8_t[]>& memory) {
-  std::cout << "CompilationImplMac::CompileArithmetic";
   const std::vector<uint32_t>& primary_dimension =
       operands[operation.inputs[0]].dimensions;
   const std::vector<uint32_t>& secondary_dimension =

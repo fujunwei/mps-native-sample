@@ -34,8 +34,6 @@ int32_t ModelImplMac::SetOperandValue(uint32_t index, const std::vector<float>& 
 }
 
 int32_t ModelImplMac::AddOperation(int32_t type, const std::vector<uint32_t>& inputs, const std::vector<uint32_t>& outputs) {
-  std::cout << "  ModelImplMac::AddOperation";
-  std::cout << "    " << "type: " << type;
   Operation operation;
   operation.type = type;
   operation.inputs = inputs;
@@ -45,7 +43,6 @@ int32_t ModelImplMac::AddOperation(int32_t type, const std::vector<uint32_t>& in
 }
 
 int32_t ModelImplMac::IdentifyInputsAndOutputs(const std::vector<uint32_t>& inputs, const std::vector<uint32_t>& outputs) {
-  std::cout << "  ModelImplMac::IdentifyInputsAndOutputs";
   inputs_ = inputs;
   outputs_ = outputs;
   return NOT_ERROR;

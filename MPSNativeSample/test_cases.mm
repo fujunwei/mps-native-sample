@@ -15,6 +15,7 @@
 namespace ml {
 
 void ConvFloat() {
+  std::cout << "\nBegin ConvFloat test cases.\n\n";
   std::vector<float> expected_data = {0.875, 0.875, 0.875, 0.875};
   auto model = std::make_unique<ModelImplMac>();
   
@@ -54,11 +55,13 @@ void ConvFloat() {
   auto execution = std::make_unique<ExecutionImplMacMPS>(compilation.get());
   execution->StartCompute();
   
+  std::cout << "\n=============================";
   if (execution->OutputData() == expected_data) {
-    std::cout << "\nConvFloat test case passed\n";
+    std::cout << "\nConvFloat test case passed.\n";
   } else {
-    std::cout << "\nConvFloat test case doesn't pass\n";
+    std::cout << "\nConvFloat test case doesn't pass.\n";
   }
+  std::cout << "=============================\n";
 }
 
 }  // namespace ml

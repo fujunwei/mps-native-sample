@@ -11,10 +11,7 @@
 #include "depthwise_conv_test.h"
 
 int main(int argc, const char * argv[]) {
-  // insert code here...
-  std::cout << "Hello, World!\n";
-  
-//  ml::ConvFloat();
+  ml::ConvFloat();
   
   ml::DepthwiseConv2dFloatLarge();
   

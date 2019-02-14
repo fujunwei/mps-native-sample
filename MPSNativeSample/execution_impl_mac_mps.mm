@@ -73,8 +73,6 @@ MPSImageDescriptor* API_AVAILABLE(macosx(10.13))
                         numberOfImages:n
                                  usage:MTLTextureUsageShaderRead |
                                        MTLTextureUsageShaderWrite];
-  std::cout << "Create MPSImageDescriptor " << mpsimage_desc << " [" << width
-            << ", " << height << ", " << channels << "]";
   return mpsimage_desc;
 }
 
@@ -156,7 +154,6 @@ void ExecutionImplMacMPS::CreateOutputMTLBuffer() {
 }
 
 void ExecutionImplMacMPS::StartCompute() {
-  std::cout << "ExecutionImplMac::StartCompute";
   bool success = true;
   if (@available(macOS 10.13, *)) {
     do {

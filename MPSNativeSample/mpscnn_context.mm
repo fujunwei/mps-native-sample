@@ -180,7 +180,6 @@ id<MTLComputePipelineState> MPSCNNContext::GetPipelineState(NSString* kernel) {
     std::cout << "Hit in pipeline cache for: " << kernelStr;
     return pipelineCache_[kernelStr];
   }
-  std::cout << "Miss in pipeline cache for: " << kernelStr;
   id<MTLFunction> func = [library newFunctionWithName:kernel];
   if (!func) {
     std::cout << "Couldn't get function: " << kernelStr;
@@ -213,7 +212,6 @@ id<MTLComputePipelineState> MPSCNNContext::GetSpecializedPipelineState(
   }
   NSError* errors;
 
-  std::cout << "Miss in pipeline cache for: " << kernelStr;
   id<MTLFunction> func =
       [library newFunctionWithName:kernel constantValues:constantValues error:&errors];
   if (!func) {

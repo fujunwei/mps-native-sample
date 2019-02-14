@@ -15,6 +15,7 @@
 namespace ml {
 
 void DepthwiseConv2dFloatLarge() {
+  std::cout << "\nBegin DepthwiseConv2dFloatLarge test cases.\n\n";
   auto model = std::make_unique<ModelImplMac>();
   uint32_t operandIndex = 0;
   
@@ -59,11 +60,13 @@ void DepthwiseConv2dFloatLarge() {
   auto execution = std::make_unique<ExecutionImplMacMPS>(compilation.get());
   execution->StartCompute();
   
+  std::cout << "\n=============================";
   if (execution->OutputData() == expected_data) {
-    std::cout << "\nConvFloat test case passed\n";
+    std::cout << "\nConvFloat test case passed.\n";
   } else {
-    std::cout << "\nConvFloat test case doesn't pass\n";
+    std::cout << "\nConvFloat test case doesn't pass.\n";
   }
+  std::cout << "=============================\n";
 }
   
 void Depthwise28_28Conv5_5() {

@@ -70,7 +70,6 @@ bool ParameterExtracterForConv(const OperationMac& operation,
   filter_width = filter.dimensions[2];
 
   const OperandMac& bias = operands[inputs[index++]];
-  std::cout << "  bias length: " << bias.dimensions[0];
 
   if ((!depthwise && inputs.size() == 10) ||
       (depthwise && inputs.size() == 11)) {
