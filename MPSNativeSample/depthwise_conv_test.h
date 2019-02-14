@@ -8,6 +8,8 @@
 namespace ml {
 
 void DepthwiseConv2dFloatLarge();
+  
+void Depthwise28_28Conv5_5();
 
 }  // namespace ml
 
