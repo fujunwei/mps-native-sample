@@ -20,17 +20,29 @@
 		5B440B852212BADC00CCCE0F /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B440B842212BADC00CCCE0F /* MetalPerformanceShaders.framework */; };
 		5B440BA52213AE2100CCCE0F /* test_cases.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440BA42213AE2100CCCE0F /* test_cases.mm */; };
 		5B440BA82213BA4600CCCE0F /* depthwise_conv_test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B440BA72213BA4500CCCE0F /* depthwise_conv_test.mm */; };
+		5B747E262216898A008C1BD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B747E252216898A008C1BD9 /* Foundation.framework */; };
+		5B747E28221689A0008C1BD9 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B747E27221689A0008C1BD9 /* MetalKit.framework */; };
+		5B747E2A221689AB008C1BD9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B747E29221689AB008C1BD9 /* CoreGraphics.framework */; };
+		5B747E4522182DAA008C1BD9 /* weights_5_5_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B747E4222182DAA008C1BD9 /* weights_5_5_1.txt */; };
+		5B747E4622182DAA008C1BD9 /* input_data_28_28_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B747E4322182DAA008C1BD9 /* input_data_28_28_1.txt */; };
+		5B747E4722182DAA008C1BD9 /* depthwise_28_28_conv_5_5_output.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B747E4422182DAA008C1BD9 /* depthwise_28_28_conv_5_5_output.txt */; };
+		5B747E4822182F8B008C1BD9 /* depthwise_28_28_conv_5_5_output.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B747E4422182DAA008C1BD9 /* depthwise_28_28_conv_5_5_output.txt */; };
+		5B747E4922182F8B008C1BD9 /* input_data_28_28_1.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B747E4322182DAA008C1BD9 /* input_data_28_28_1.txt */; };
+		5B747E4A22182F8B008C1BD9 /* weights_5_5_1.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B747E4222182DAA008C1BD9 /* weights_5_5_1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5B440B16220319AD00CCCE0F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
 			files = (
+				5B747E4822182F8B008C1BD9 /* depthwise_28_28_conv_5_5_output.txt in CopyFiles */,
+				5B747E4922182F8B008C1BD9 /* input_data_28_28_1.txt in CopyFiles */,
+				5B747E4A22182F8B008C1BD9 /* weights_5_5_1.txt in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -60,6 +72,12 @@
 		5B440BA42213AE2100CCCE0F /* test_cases.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = test_cases.mm; sourceTree = "<group>"; };
 		5B440BA62213BA4500CCCE0F /* depthwise_conv_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = depthwise_conv_test.h; sourceTree = "<group>"; };
 		5B440BA72213BA4500CCCE0F /* depthwise_conv_test.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = depthwise_conv_test.mm; sourceTree = "<group>"; };
+		5B747E252216898A008C1BD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5B747E27221689A0008C1BD9 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		5B747E29221689AB008C1BD9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5B747E4222182DAA008C1BD9 /* weights_5_5_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weights_5_5_1.txt; sourceTree = "<group>"; };
+		5B747E4322182DAA008C1BD9 /* input_data_28_28_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input_data_28_28_1.txt; sourceTree = "<group>"; };
+		5B747E4422182DAA008C1BD9 /* depthwise_28_28_conv_5_5_output.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = depthwise_28_28_conv_5_5_output.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B747E2A221689AB008C1BD9 /* CoreGraphics.framework in Frameworks */,
+				5B747E28221689A0008C1BD9 /* MetalKit.framework in Frameworks */,
+				5B747E262216898A008C1BD9 /* Foundation.framework in Frameworks */,
 				5B440B852212BADC00CCCE0F /* MetalPerformanceShaders.framework in Frameworks */,
 				5B440B6D2212BA6800CCCE0F /* Metal.framework in Frameworks */,
 			);
@@ -95,6 +116,7 @@
 		5B440B1A220319AE00CCCE0F /* MPSNativeSample */ = {
 			isa = PBXGroup;
 			children = (
+				5B747E2E22180BDA008C1BD9 /* Params */,
 				5B440BA62213BA4500CCCE0F /* depthwise_conv_test.h */,
 				5B440BA72213BA4500CCCE0F /* depthwise_conv_test.mm */,
 				5B440BA32213AE2100CCCE0F /* test_cases.h */,
@@ -124,10 +146,23 @@
 		5B440B6B2212BA6800CCCE0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B747E29221689AB008C1BD9 /* CoreGraphics.framework */,
+				5B747E27221689A0008C1BD9 /* MetalKit.framework */,
+				5B747E252216898A008C1BD9 /* Foundation.framework */,
 				5B440B842212BADC00CCCE0F /* MetalPerformanceShaders.framework */,
 				5B440B6C2212BA6800CCCE0F /* Metal.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B747E2E22180BDA008C1BD9 /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				5B747E4422182DAA008C1BD9 /* depthwise_28_28_conv_5_5_output.txt */,
+				5B747E4322182DAA008C1BD9 /* input_data_28_28_1.txt */,
+				5B747E4222182DAA008C1BD9 /* weights_5_5_1.txt */,
+			);
+			path = Params;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +175,7 @@
 				5B440B14220319AD00CCCE0F /* Sources */,
 				5B440B15220319AD00CCCE0F /* Frameworks */,
 				5B440B16220319AD00CCCE0F /* CopyFiles */,
+				5B747E322218195D008C1BD9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -180,6 +216,19 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5B747E322218195D008C1BD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B747E4522182DAA008C1BD9 /* weights_5_5_1.txt in Resources */,
+				5B747E4622182DAA008C1BD9 /* input_data_28_28_1.txt in Resources */,
+				5B747E4722182DAA008C1BD9 /* depthwise_28_28_conv_5_5_output.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5B440B14220319AD00CCCE0F /* Sources */ = {

@@ -11,6 +11,7 @@
 #include <map>
 #include <memory>
 #include <vector>
+#import <Foundation/Foundation.h>
 
 #include "common.h"
 
@@ -83,6 +84,7 @@ bool ParameterExtracterForConv(const OperationMac&,
 //     const std::map<uint32_t, ValueInfo>& values,
 //     const std::unique_ptr<int8_t[]>& memory);
 
+  std::vector<float> LoadData(NSString *path);
 }  // namespace ml
 
 #endif  // SERVICES_ML_ML_UTILS_MAC_H_

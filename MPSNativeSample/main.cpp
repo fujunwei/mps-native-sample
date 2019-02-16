@@ -11,9 +11,9 @@
 #include "depthwise_conv_test.h"
 
 int main(int argc, const char * argv[]) {
-  ml::ConvFloat();
+//  ml::ConvFloat();
   
-  ml::DepthwiseConv2dFloatLarge();
+  ml::Depthwise28_28Conv5_5();
   
   return 0;
 }

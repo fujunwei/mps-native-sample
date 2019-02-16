@@ -62,9 +62,9 @@ void DepthwiseConv2dFloatLarge() {
   
   std::cout << "\n=============================";
   if (execution->OutputData() == expected_data) {
-    std::cout << "\nConvFloat test case passed.\n";
+    std::cout << "\nDepthwiseConv2dFloatLarge test case passed.\n";
   } else {
-    std::cout << "\nConvFloat test case doesn't pass.\n";
+    std::cout << "\nDepthwiseConv2dFloatLarge test case doesn't pass.\n";
   }
   std::cout << "=============================\n";
 }
@@ -73,21 +73,24 @@ void Depthwise28_28Conv5_5() {
   auto model = std::make_unique<ModelImplMac>();
   uint32_t operandIndex = 0;
   
-  std::vector<float> op1_value(28*28);
-  std::vector<float> op2_value(5*5);
-  std::vector<float> expected_data = {110, 246};
+  NSString* input_data_path = [[NSBundle mainBundle] pathForResource: [[NSString alloc] initWithUTF8String: "input_data_28_28_1"] ofType: @"txt"];
+  std::vector<float> input_data = LoadData(input_data_path);
+  NSString* weights_path = [[NSBundle mainBundle] pathForResource: [[NSString alloc] initWithUTF8String: "weights_5_5_1"] ofType: @"txt"];
+  std::vector<float> weights_data = LoadData(weights_path);
+  NSString* expected_data_path = [[NSBundle mainBundle] pathForResource: [[NSString alloc] initWithUTF8String: "depthwise_28_28_conv_5_5_output"] ofType: @"txt"];
+  std::vector<float> expected_data = LoadData(expected_data_path);;
   
   std::vector<uint32_t> dimensions0 = {1, 28, 28, 1};
   std::vector<uint32_t> dimensions1 = {1, 5, 5, 1};
   std::vector<uint32_t> dimensions2 = {1};
   
-  uint32_t op0 = operandIndex++;
+  uint32_t input_index = operandIndex++;
   model->AddOperand(TENSOR_FLOAT32, dimensions0, 0, 0);
-  uint32_t op1 = operandIndex++;
+  uint32_t weights_index = operandIndex++;
   model->AddOperand(TENSOR_FLOAT32, dimensions1, 0, 0);
-  uint32_t op2 = operandIndex++;
+  uint32_t bias_index = operandIndex++;
   model->AddOperand(TENSOR_FLOAT32, dimensions2, 0, 0);
-  uint32_t pad_code = operandIndex++;
+  uint32_t padding_code = operandIndex++;
   model->AddOperand(INT32, {}, 0, 0);
   uint32_t stride_width = operandIndex++;
   model->AddOperand(INT32, {}, 0, 0);
@@ -97,20 +100,20 @@ void Depthwise28_28Conv5_5() {
   model->AddOperand(INT32, {}, 0, 0);
   uint32_t fuse_code = operandIndex++;
   model->AddOperand(INT32, {}, 0, 0);
-  uint32_t op3 = operandIndex++;
+  uint32_t output_index = operandIndex++;
   model->AddOperand(TENSOR_FLOAT32, dimensions0, 0, 0);
   
-  model->SetOperandValue(op0, op1_value);
-  model->SetOperandValue(op1, op2_value);
-  model->SetOperandValue(op2, {100});
-  model->SetOperandValue(pad_code, {1});
+  model->SetOperandValue(input_index, input_data);
+  model->SetOperandValue(weights_index, weights_data);
+  model->SetOperandValue(bias_index, {1});
+  model->SetOperandValue(padding_code, {1});
   model->SetOperandValue(stride_width, {1});
   model->SetOperandValue(stride_height, {1});
   model->SetOperandValue(channelMultiplier, {1});
   model->SetOperandValue(fuse_code, {0});
-  model->AddOperation(DEPTHWISE_CONV_2D, {op0, op1, op2, pad_code, stride_width, stride_height, channelMultiplier, fuse_code}, {op3});
+  model->AddOperation(DEPTHWISE_CONV_2D, {input_index, weights_index, bias_index, padding_code, stride_width, stride_height, channelMultiplier, fuse_code}, {output_index});
   
-  model->IdentifyInputsAndOutputs({op0}, {op3});
+  model->IdentifyInputsAndOutputs({input_index}, {output_index});
   
   auto compilation = std::make_unique<CompilationImplMac>(model.get());
   compilation->Finish(PREFER_SUSTAINED_SPEED);
@@ -118,11 +121,13 @@ void Depthwise28_28Conv5_5() {
   auto execution = std::make_unique<ExecutionImplMacMPS>(compilation.get());
   execution->StartCompute();
   
+  std::cout << "\n=============================";
   if (execution->OutputData() == expected_data) {
-    std::cout << "\nConvFloat test case passed\n";
+    std::cout << "\nDepthwise28_28Conv5_5 test case passed\n";
   } else {
-    std::cout << "\nConvFloat test case doesn't pass\n";
+    std::cout << "\nDepthwise28_28Conv5_5 test case doesn't pass\n";
   }
+  std::cout << "=============================\n";
 }
 
 

@@ -117,4 +117,19 @@ bool ParameterExtracterForConv(const OperationMac& operation,
 //    opearnd_info_array.push_back(std::move(info));
 //  }
 //}
+  
+std::vector<float> LoadData(NSString *path) {
+  NSError *error = nil;
+  NSString *str = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+  if (error != nil) {
+    NSLog([error localizedDescription]);//将错误信息输出来
+  }
+  NSArray *arr = [str componentsSeparatedByString:@","];
+  std::vector<float> data;
+  for (int i = 0; i < [arr count]; ++i) {
+    data.push_back([[arr objectAtIndex:i] floatValue]);
+  }
+  return data;
+}
+
 }
