@@ -122,13 +122,16 @@ void Depthwise28_28Conv5_5() {
   auto execution = std::make_unique<ExecutionImplMacMPS>(compilation.get());
   execution->StartCompute();
   
-  std::cout << "\n=============================";
-  if (execution->OutputData() == expected_data) {
-    std::cout << "\nDepthwise28_28Conv5_5 test case passed\n";
-  } else {
-    std::cout << "\nDepthwise28_28Conv5_5 test case doesn't pass\n";
+  int length = 28 * 28;
+  std::vector<float> output_data = execution->OutputData();
+  std::cout << "\n=============================\n";
+  for (int i = 0; i < length; ++i) {
+    if(output_data[i] != expected_data[i]) {
+      std::cout << "index: " << i << " output_data: " << output_data[i] << " expected_data: " << expected_data[i];
+      break;
+    }
   }
-  std::cout << "=============================\n";
+  std::cout << "\n=============================\n";
 }
 
 void Depthwise28_28_528Conv5_5_528() {
@@ -185,14 +188,14 @@ void Depthwise28_28_528Conv5_5_528() {
   auto execution = std::make_unique<ExecutionImplMacMPS>(compilation.get());
   execution->StartCompute();
   
-  std::cout << "\n=============================";
+  std::cout << "\n=============================\n";
   float sum = 0;
   uint32_t length = 28 * 28 * 528;
   std::vector<float> output_data = execution->OutputData();
   for (int i = 0; i < length; i++) {
     sum += pow(output_data[i] - expected_data[i], 2);
   }
-  std::cout << "\nDepthwise28_28_528Conv5_5_528 test case = " << sum / length;
-  std::cout << "=============================\n";
+  std::cout << "Depthwise28_28_528Conv5_5_528 test case = " << sum / length;
+  std::cout << "\n=============================\n";
 }
 }  // namespace ml
