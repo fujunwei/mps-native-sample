@@ -11,6 +11,7 @@ void DepthwiseConv2dFloatLarge();
   
 void Depthwise28_28Conv5_5();
 
+void Depthwise28_28_528Conv5_5_528();
 }  // namespace ml
 
 #endif  // SERVICES_ML_DEPTHWISE_CONV_TEST_H_

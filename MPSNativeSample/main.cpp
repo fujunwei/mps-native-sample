@@ -15,5 +15,7 @@ int main(int argc, const char * argv[]) {
   
   ml::Depthwise28_28Conv5_5();
   
+  ml::Depthwise28_28_528Conv5_5_528();
+  
   return 0;
 }
