@@ -125,6 +125,12 @@ void Depthwise28_28Conv5_5() {
   int length = 28 * 28;
   std::vector<float> output_data = execution->OutputData();
   std::cout << "\n=============================\n";
+  float sum = 0;
+  for (int i = 0; i < length; i++) {
+    sum += pow(output_data[i] - expected_data[i], 2);
+  }
+  std::cout << "Depthwise28_28Conv5_5 test case = " << sum / length << "\n";
+  
   for (int i = 0; i < length; ++i) {
     if(output_data[i] != expected_data[i]) {
       std::cout << "index: " << i << " output_data: " << output_data[i] << " expected_data: " << expected_data[i];
