@@ -15,6 +15,37 @@
 namespace ml {
 
 API_AVAILABLE(macosx(10.13))
+MPSNNImageNode* GetMPSImageNode(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
+                                uint32_t input_index,
+                                const std::vector<uint32_t>& current_graph_inputs) {
+  bool export_image = true;
+  for (size_t j = 0; j < current_graph_inputs.size(); j++) {
+    if (input_index == current_graph_inputs[j]) {
+      export_image = false;
+      break;
+    }
+  }
+  
+  MPSNNImageNode* new_image_node = nullptr;
+  if (export_image) {
+    MPSNNImageNode* export_image_node = image_nodes[input_index];
+    TemporaryImageHandle* input_handle = [[TemporaryImageHandle alloc]
+                                          initWithLabel:[NSString
+                                                         stringWithFormat:@"%d", input_index]];
+    if (export_image_node) {
+      export_image_node.exportFromGraph = true;
+      export_image_node.handle = input_handle;
+    }
+    // Create a placeholder for input image, but mps_image_nodes_[inputs[0]]
+    // doesn't need reuse in new graph that does not need to reset.
+    new_image_node = [[MPSNNImageNode alloc] initWithHandle:input_handle];
+  } else {
+    new_image_node = image_nodes[input_index];
+  }
+  return new_image_node;
+}
+
+API_AVAILABLE(macosx(10.13))
 MPSCNNNeuron* CreateMPSCNNNeuron(int32_t fuse_code) {
   MPSCNNNeuron* relu = nullptr;
   if (fuse_code == FUSED_NONE) {
@@ -355,7 +386,8 @@ bool CompileConcatenation(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           const OperationMac& concat,
                           const std::map<uint32_t, ValueInfo>& values,
                           const std::unique_ptr<int8_t[]>& memory,
-                          const std::vector<OperandMac>& operands) {
+                          const std::vector<OperandMac>& operands,
+                          const std::vector<uint32_t>& current_graph_inputs) {
   std::vector<uint32_t> inputs = concat.inputs;
   std::vector<uint32_t> outputs = concat.outputs;
 
@@ -379,7 +411,8 @@ bool CompileConcatenation(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
       return false;
     }
 
-    [image_array addObject:image_nodes[concat_input_idx]];
+    [image_array addObject:GetMPSImageNode(image_nodes, concat_input_idx,
+                                           current_graph_inputs)];
   }
 
   MPSNNConcatenationNode* concat_node =
@@ -519,6 +552,7 @@ bool CompileFullyConnected(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
 API_AVAILABLE(macosx(10.13))
 bool CompileBilinearScale(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           OperationMac& operation,
+                          bool& custom_kernel,
                           const std::vector<OperandMac>& operands,
                           const std::map<uint32_t, ValueInfo>& values,
                           const std::unique_ptr<int8_t[]>& memory) {
@@ -546,8 +580,13 @@ bool CompileBilinearScale(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
   const OperandMac& input_operand = operands[operation.inputs[0]];
   if (output_operand.dimensions[2] % input_operand.dimensions[2] != 0 ||
       output_operand.dimensions[1] % input_operand.dimensions[1] != 0) {
-    std::cout << "The upsampling factor for the x/y must be integer.";
-    return false;
+    operation.custom_cnn_kernel = [[MPSNNResizeBilinear alloc]
+                                       initWithDevice:GetMPSCNNContext().device
+                                       resizeWidth:output_operand.dimensions[2]
+                                       resizeHeight:output_operand.dimensions[1]
+                                       alignCorners:true];
+    custom_kernel = true;
+    return true;
   }
 
   // output_operand.dimensions[2] is width for "NHWC" data layout.

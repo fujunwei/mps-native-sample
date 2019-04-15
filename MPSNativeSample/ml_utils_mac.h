@@ -41,6 +41,7 @@ struct OperationMac : public Operation {
   explicit OperationMac(const OperationMac&);
   explicit OperationMac(const Operation&);
   ~OperationMac();
+  API_AVAILABLE(macos(10_13)) MPSCNNKernel* custom_cnn_kernel;
   LocalOperation local_operation;
 
   int fuse_code;

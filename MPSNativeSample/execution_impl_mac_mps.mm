@@ -85,6 +85,33 @@ void SaveTemporaryImages(std::map<uint32_t, MPSImage*>& temporary_images,
   }
 }
 
+API_AVAILABLE(macosx(10.13))
+MPSTemporaryImage* CreateMPSTemporaryImage(
+                                           const id<MTLCommandBuffer>& command_buffer,
+                                           const OperandMac& operand) {
+  MPSImageDescriptor* descriptor = CreateMPSImageDescriptor(operand);
+  if (!descriptor)
+    return nullptr;
+  
+  MPSTemporaryImage* temp_image =
+  [MPSTemporaryImage temporaryImageWithCommandBuffer:command_buffer
+                                     imageDescriptor:descriptor];
+  temp_image.readCount = operand.read_count;
+  
+  return temp_image;
+}
+
+API_AVAILABLE(macosx(10.13))
+MPSImage* CreateMPSOutputImage(const id<MTLCommandBuffer>& command_buffer,
+                               const OperandMac& operand) {
+  MPSImageDescriptor* descriptor = CreateMPSImageDescriptor(operand);
+  if (!descriptor)
+    return nullptr;
+  
+  return [[MPSImage alloc] initWithDevice:GetMPSCNNContext().device
+                          imageDescriptor:descriptor];
+}
+  
 }  // namespace
 
 ExecutionImplMacMPS::ExecutionImplMacMPS(
@@ -152,6 +179,48 @@ void ExecutionImplMacMPS::CreateOutputMTLBuffer() {
                     options:MTLResourceOptionCPUCacheModeWriteCombined]);
   }
 }
+  
+API_AVAILABLE(macosx(10.13))
+void ExecutionImplMacMPS::EncodeCustomKernel(
+                                             const id<MTLCommandBuffer>& command_buffer,
+                                             std::map<uint32_t, MPSImage*>& output_mps_images,
+                                             std::map<uint32_t, MPSImage*>& temporary_mps_images,
+                                             uint32_t input_index) {
+  if (compilation_->custom_operations_.find(input_index) !=
+      compilation_->custom_operations_.end()) {
+    const OperationMac& custom_operation =
+    compilation_->custom_operations_[input_index];
+    bool last_node = false;
+    for (auto index : compilation_->outputs_) {
+      if (custom_operation.outputs[0] == index)
+        last_node = true;
+    }
+    MPSImage* dest_image;
+    uint32_t output_index = custom_operation.outputs[0];
+    const OperandMac& operand = compilation_->operands_[output_index];
+    if (last_node) {
+      dest_image = CreateMPSOutputImage(command_buffer, operand);
+      output_mps_images[output_index] = dest_image;
+    } else {
+      dest_image = CreateMPSTemporaryImage(command_buffer, operand);
+      temporary_mps_images[output_index] = dest_image;
+    }
+    
+    MPSImage* src_image;
+    uint32_t input_index = custom_operation.inputs[0];
+    const OperandMac& input_operand = compilation_->operands_[input_index];
+    // DCHECK(compilation_->inputs_.size() == 1);
+    if (input_index == compilation_->inputs_[0]) {
+      src_image = input_mpsimages_[input_index];
+    } else {
+      // The custom kernel split graph into two sub graphs.
+      src_image = temporary_mps_images[input_index];
+    }
+    [custom_operation.custom_cnn_kernel encodeToCommandBuffer:command_buffer
+                                                  sourceImage:src_image
+                                             destinationImage:dest_image];
+  }
+}
 
 void ExecutionImplMacMPS::StartCompute() {
   bool success = true;
@@ -191,6 +260,8 @@ void ExecutionImplMacMPS::StartCompute() {
 
         std::map<uint32_t, MPSImage*> output_mps_images;
         std::map<uint32_t, MPSImage*> temporary_mps_images;
+        EncodeCustomKernel(command_buffer, output_mps_images,
+                           temporary_mps_images, compilation_->inputs_[0]);
         for (size_t i = 0; i < compilation_->graphs_.size(); i++) {
           // temporary_inputs_[i -1] is the temporary input image index.
           // temporary_mps_images[temporary_inputs_[i -1]] is temporary input

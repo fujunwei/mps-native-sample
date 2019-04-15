@@ -50,7 +50,8 @@ bool CompileConcatenation(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           const OperationMac& concat,
                           const std::map<uint32_t, ValueInfo>& values,
                           const std::unique_ptr<int8_t[]>& memory,
-                          const std::vector<OperandMac>& operands);
+                          const std::vector<OperandMac>& operands,
+                          const std::vector<uint32_t>& current_graph_inputs);
 
 
 bool CompileArithmetic(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
@@ -70,6 +71,7 @@ bool CompileFullyConnected(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
 
 bool CompileBilinearScale(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                           OperationMac&,
+                          bool& custom_kernel,
                           const std::vector<OperandMac>& operands,
                           const std::map<uint32_t, ValueInfo>& values,
                           const std::unique_ptr<int8_t[]>& memory);

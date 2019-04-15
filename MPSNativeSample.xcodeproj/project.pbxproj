@@ -37,6 +37,15 @@
 		5B747E54221833A5008C1BD9 /* depthwise_28_28_528_cov_5_5_528_output.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B747E4C22183397008C1BD9 /* depthwise_28_28_528_cov_5_5_528_output.txt */; };
 		5B747E55221833A5008C1BD9 /* input_data_28_28_528.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B747E4D22183397008C1BD9 /* input_data_28_28_528.txt */; };
 		5B747E56221833A5008C1BD9 /* weights_5_5_528.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B747E4E22183397008C1BD9 /* weights_5_5_528.txt */; };
+		E433C84E22642C74002D39F2 /* resize_bilinear_test.mm in Sources */ = {isa = PBXBuildFile; fileRef = E433C84D22642C74002D39F2 /* resize_bilinear_test.mm */; };
+		E433C85122642EE1002D39F2 /* input_data_65_65_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = E433C84F22642EE1002D39F2 /* input_data_65_65_1.txt */; };
+		E433C85222642EE1002D39F2 /* output_data_513_513_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = E433C85022642EE1002D39F2 /* output_data_513_513_1.txt */; };
+		E433C85322644FE9002D39F2 /* input_data_65_65_1.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = E433C84F22642EE1002D39F2 /* input_data_65_65_1.txt */; };
+		E433C85422644FE9002D39F2 /* output_data_513_513_1.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = E433C85022642EE1002D39F2 /* output_data_513_513_1.txt */; };
+		E433C8572264578D002D39F2 /* output_data_513_513_21.txt in Resources */ = {isa = PBXBuildFile; fileRef = E433C8552264578D002D39F2 /* output_data_513_513_21.txt */; };
+		E433C8582264578D002D39F2 /* input_data_65_65_21.txt in Resources */ = {isa = PBXBuildFile; fileRef = E433C8562264578D002D39F2 /* input_data_65_65_21.txt */; };
+		E433C85922645796002D39F2 /* input_data_65_65_21.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = E433C8562264578D002D39F2 /* input_data_65_65_21.txt */; };
+		E433C85A22645796002D39F2 /* output_data_513_513_21.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = E433C8552264578D002D39F2 /* output_data_513_513_21.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +55,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				E433C85922645796002D39F2 /* input_data_65_65_21.txt in CopyFiles */,
+				E433C85A22645796002D39F2 /* output_data_513_513_21.txt in CopyFiles */,
+				E433C85322644FE9002D39F2 /* input_data_65_65_1.txt in CopyFiles */,
+				E433C85422644FE9002D39F2 /* output_data_513_513_1.txt in CopyFiles */,
 				5B747E53221833A5008C1BD9 /* bias_528.txt in CopyFiles */,
 				5B747E54221833A5008C1BD9 /* depthwise_28_28_528_cov_5_5_528_output.txt in CopyFiles */,
 				5B747E55221833A5008C1BD9 /* input_data_28_28_528.txt in CopyFiles */,
@@ -94,6 +107,12 @@
 		5B747E4C22183397008C1BD9 /* depthwise_28_28_528_cov_5_5_528_output.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = depthwise_28_28_528_cov_5_5_528_output.txt; sourceTree = "<group>"; };
 		5B747E4D22183397008C1BD9 /* input_data_28_28_528.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input_data_28_28_528.txt; sourceTree = "<group>"; };
 		5B747E4E22183397008C1BD9 /* weights_5_5_528.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weights_5_5_528.txt; sourceTree = "<group>"; };
+		E433C84C22642C74002D39F2 /* resize_bilinear_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resize_bilinear_test.h; sourceTree = "<group>"; };
+		E433C84D22642C74002D39F2 /* resize_bilinear_test.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = resize_bilinear_test.mm; sourceTree = "<group>"; };
+		E433C84F22642EE1002D39F2 /* input_data_65_65_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input_data_65_65_1.txt; sourceTree = "<group>"; };
+		E433C85022642EE1002D39F2 /* output_data_513_513_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_data_513_513_1.txt; sourceTree = "<group>"; };
+		E433C8552264578D002D39F2 /* output_data_513_513_21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output_data_513_513_21.txt; sourceTree = "<group>"; };
+		E433C8562264578D002D39F2 /* input_data_65_65_21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input_data_65_65_21.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +151,8 @@
 		5B440B1A220319AE00CCCE0F /* MPSNativeSample */ = {
 			isa = PBXGroup;
 			children = (
+				E433C84C22642C74002D39F2 /* resize_bilinear_test.h */,
+				E433C84D22642C74002D39F2 /* resize_bilinear_test.mm */,
 				5B747E2E22180BDA008C1BD9 /* Params */,
 				5B440BA62213BA4500CCCE0F /* depthwise_conv_test.h */,
 				5B440BA72213BA4500CCCE0F /* depthwise_conv_test.mm */,
@@ -174,6 +195,10 @@
 		5B747E2E22180BDA008C1BD9 /* Params */ = {
 			isa = PBXGroup;
 			children = (
+				E433C8562264578D002D39F2 /* input_data_65_65_21.txt */,
+				E433C8552264578D002D39F2 /* output_data_513_513_21.txt */,
+				E433C84F22642EE1002D39F2 /* input_data_65_65_1.txt */,
+				E433C85022642EE1002D39F2 /* output_data_513_513_1.txt */,
 				5B747E4B22183397008C1BD9 /* bias_528.txt */,
 				5B747E4C22183397008C1BD9 /* depthwise_28_28_528_cov_5_5_528_output.txt */,
 				5B747E4D22183397008C1BD9 /* input_data_28_28_528.txt */,
@@ -242,12 +267,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E433C8572264578D002D39F2 /* output_data_513_513_21.txt in Resources */,
 				5B747E4522182DAA008C1BD9 /* weights_5_5_1.txt in Resources */,
+				E433C85122642EE1002D39F2 /* input_data_65_65_1.txt in Resources */,
 				5B747E5022183397008C1BD9 /* depthwise_28_28_528_cov_5_5_528_output.txt in Resources */,
 				5B747E4622182DAA008C1BD9 /* input_data_28_28_1.txt in Resources */,
 				5B747E5222183397008C1BD9 /* weights_5_5_528.txt in Resources */,
 				5B747E4722182DAA008C1BD9 /* depthwise_28_28_conv_5_5_output.txt in Resources */,
 				5B747E4F22183397008C1BD9 /* bias_528.txt in Resources */,
+				E433C85222642EE1002D39F2 /* output_data_513_513_1.txt in Resources */,
+				E433C8582264578D002D39F2 /* input_data_65_65_21.txt in Resources */,
 				5B747E5122183397008C1BD9 /* input_data_28_28_528.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B440B802212BA9E00CCCE0F /* compilation_impl_mac_mps.mm in Sources */,
+				E433C84E22642C74002D39F2 /* resize_bilinear_test.mm in Sources */,
 				5B440BA82213BA4600CCCE0F /* depthwise_conv_test.mm in Sources */,
 				5B440B832212BA9E00CCCE0F /* ml_utils_mac.mm in Sources */,
 				5B440B812212BA9E00CCCE0F /* common.cc in Sources */,

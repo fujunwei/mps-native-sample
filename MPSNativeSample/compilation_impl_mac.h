@@ -45,6 +45,8 @@ class CompilationImplMac {
   // Used for MPSNNGraph
   std::vector<MPSNNGraph*> graphs_;
   std::map<uint32_t, MPSNNImageNode*> mps_image_nodes_;
+  // The first Key is index of input image.
+  std::map<uint32_t, OperationMac> custom_operations_;
 
   CompilationImplMac* compilation_factory_;
 };
