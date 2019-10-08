@@ -10,6 +10,7 @@
 #include "test_cases.h"
 #include "depthwise_conv_test.h"
 #include "resize_bilinear_test.h"
+#include "average_pool_test.h"
 
 int main(int argc, const char * argv[]) {
 //  ml::ConvFloat();
@@ -18,9 +19,11 @@ int main(int argc, const char * argv[]) {
 //
 //  ml::Depthwise28_28_528Conv5_5_528();
   
-  ml::ResizeBilinear65_65To513_513();
+//  ml::ResizeBilinear65_65To513_513();
+//
+//  ml::ResizeBilinear65_65_21To513_513_21();
   
-  ml::ResizeBilinear65_65_21To513_513_21();
+  ml::AveragePool();
   
   return 0;
 }

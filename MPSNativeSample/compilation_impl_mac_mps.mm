@@ -251,6 +251,10 @@ bool CompileConv2DOrDepthwiseConv2D(
   return true;
 }
 
+  
+// MPSCNNPoolingNode is released as unexpected.
+MPSCNNPoolingNode* pool_node;
+  
 API_AVAILABLE(macosx(10.13))
 bool CompileAverageOrMaxPool2D(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
                                const OperationMac& operation,
@@ -300,7 +304,7 @@ bool CompileAverageOrMaxPool2D(std::map<uint32_t, MPSNNImageNode*>& image_nodes,
     return false;
   }
 
-  MPSCNNPoolingNode* pool_node;
+//  MPSCNNPoolingNode* pool_node;
   MPSNNImageNode* input_image = image_nodes[inputs[0]];
   if (operation.type == AVERAGE_POOL_2D) {
     pool_node = [[MPSCNNPoolingAverageNode alloc] initWithSource:input_image
